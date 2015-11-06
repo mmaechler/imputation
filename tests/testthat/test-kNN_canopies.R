@@ -56,6 +56,7 @@ test_that("trivial cases work", {
 
 
 test_that("simple cases work correctly", {
+  set.seed(34)
   x1 <- matrix(rnorm(200), 20, 10)
   x1[x1 > 1.25] <- NA
   x3 <- create_canopies(x1, n_canopies= 5, q= 2)

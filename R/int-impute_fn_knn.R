@@ -28,7 +28,8 @@ impute_fn_knn_all.nonPar <- function(x_missing, x_complete, k, q, sigma,
       # which neighbors have data on column j?
       neighbor_indices = which(!is.na(x_complete)[,j])
       # impute
-      return(impute_fn_knn(x_complete[neighbor_indices, j], distances[neighbor_indices], 
+      return(impute_fn_knn(x_complete[neighbor_indices, j], 
+                           distances[neighbor_indices + ifelse(x_comp_rowID < neighbor_indices, 0, -1)], 
                            k=k, sigma= sigma))
     }, distances= distances))
     i_original[missing_cols] <- imputed_values
@@ -70,7 +71,8 @@ impute_fn_knn_all.Par <- function(x_missing, x_complete, k, q, sigma,
       # which neighbors have data on column j?
       neighbor_indices = which(!is.na(x_complete)[,j])
       # impute
-      return(impute_fn_knn(x_complete[neighbor_indices, j], distances[neighbor_indices], 
+      return(impute_fn_knn(x_complete[neighbor_indices, j], 
+                           distances[neighbor_indices + ifelse(x_comp_rowID < neighbor_indices, 0, -1)], 
                            k=k, sigma= sigma))
     }, distances= distances))
     i_original[missing_cols] <- imputed_values

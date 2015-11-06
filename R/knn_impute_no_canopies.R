@@ -79,7 +79,7 @@ kNN_impute.no_canopies <- function(x, k, q= 2, verbose=TRUE, check_scale= TRUE,
   
   # [10/13] add rownames such that impute_prelim() can work with or without canopies
   # and so that impute_fn_knn_all.** work properly.
-  # Specifically, this is needed if kNN_impute.default() is called outside kNN_impute()
+  # Specifically, this is needed if kNN_impute.no_canopies() is called outside kNN_impute()
   if (is.null(rownames(x))) {
     rownames(x) <- 1:nrow(x)
   }

@@ -49,7 +49,7 @@ NumericVector dist_q_matrix (NumericVector& x_ref, NumericMatrix& x_rest, int& q
   return out;
 }
 
-
+//-----------------------------------------------------------------------------
 NumericMatrix row_erase (NumericMatrix& x, IntegerVector& rowID) {
   rowID = rowID.sort();
 
