@@ -19,10 +19,13 @@ using namespace std;
 // @seealso \code{\link[stats]{weighted.mean}}
 // [[Rcpp::export]]
 double weighted_mean(NumericVector& x, NumericVector w) {
-  if (x.size() != w.size()) {
-    cout << "ERROR: Length of x and w differ." << endl;
-    return -1;
-  }
+
+// [AW - 11/6/2015] removing this error message. It appears to be confused by NA values of x
+// even when the x.size() == w.size()
+//  if (x.size() != w.size()) {
+//    cout << "ERROR: Length of x and w differ." << endl;
+//    return -1;
+//  }
 
   // normalize weights and compute weighted mean
   double s= 0.0, wm= 0.0;
