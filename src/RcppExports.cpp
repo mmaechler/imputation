@@ -28,6 +28,18 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// kern_wt
+NumericVector kern_wt(double& sigma, NumericVector& x);
+RcppExport SEXP imputation_kern_wt(SEXP sigmaSEXP, SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< double& >::type sigma(sigmaSEXP);
+    Rcpp::traits::input_parameter< NumericVector& >::type x(xSEXP);
+    __result = Rcpp::wrap(kern_wt(sigma, x));
+    return __result;
+END_RCPP
+}
 // impute_fn_knn
 double impute_fn_knn(NumericVector& values, NumericVector& distances, int& k, double& sigma);
 RcppExport SEXP imputation_impute_fn_knn(SEXP valuesSEXP, SEXP distancesSEXP, SEXP kSEXP, SEXP sigmaSEXP) {

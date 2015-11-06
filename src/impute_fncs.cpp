@@ -71,7 +71,7 @@ IntegerVector sort_indices(NumericVector& values) {
 // this function is equivalent to calculating via
 // kernelMatrix(kern, c(0, smallest_distances))[1, -1, drop= TRUE]
 // in R library(kernlab)
-// [[Rcpp:export]]
+// [[Rcpp::export]]
 NumericVector kern_wt (double& sigma, NumericVector& x) {
   NumericVector ret(x.size() - 1);
 

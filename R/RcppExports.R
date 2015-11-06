@@ -14,6 +14,10 @@ sort_indices <- function(values) {
     .Call('imputation_sort_indices', PACKAGE = 'imputation', values)
 }
 
+kern_wt <- function(sigma, x) {
+    .Call('imputation_kern_wt', PACKAGE = 'imputation', sigma, x)
+}
+
 #' @title Imputation function for kNN
 #' @description Function for KNN imputation for a single element.
 #' Distances are weighted by a kernal function to produce a weighted

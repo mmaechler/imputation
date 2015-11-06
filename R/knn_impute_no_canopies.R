@@ -61,7 +61,8 @@ kNN_impute.no_canopies <- function(x, k, q= 2, verbose=TRUE, check_scale= TRUE,
   #--------------------------------------------------------
   # https://en.wikipedia.org/wiki/Kernel_density_estimation#Practical_estimation_of_the_bandwidth
   opt_h <- (4 * sd(x, na.rm=T)^5 / (3 * nrow(x)))^(1/5)
-  kern <- rbfdot(opt_h)
+  # kern <- rbfdot(opt_h)
+  sigma <- kpar(rbfdot(opt_h))$sigma
   
   # 02a. Impute missing rows to complete-data column means 
   #--------------------------------------------------------
@@ -91,11 +92,11 @@ kNN_impute.no_canopies <- function(x, k, q= 2, verbose=TRUE, check_scale= TRUE,
   if (parallel == FALSE) {
     x_missing_imputed <- impute_fn_knn_all.nonPar(x_missing= prelim$x_missing,
                                x_complete= x, k=k, q=q, 
-                               kern= kern, verbose= verbose)
+                               sigma= sigma, verbose= verbose)
   } else if (parallel == TRUE) {
     x_missing_imputed <- impute_fn_knn_all.Par(x_missing= prelim$x_missing,
                                x_complete= x, k=k, q=q,
-                               kern= kern, leave_cores= leave_cores)
+                               sigma= sigma, leave_cores= leave_cores)
   }
   
   # insert imputations

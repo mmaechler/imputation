@@ -2,7 +2,6 @@
 
 export(create_canopies)
 export(dist_q.matrix)
-export(impute_fn_knn)
 export(kNN_impute)
 export(kNN_impute.canopies)
 export(kNN_impute.no_canopies)
