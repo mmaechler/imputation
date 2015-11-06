@@ -1,10 +1,13 @@
 Package: imputation
 Type: Package
 Title: imputation
-Version: 0.7.0
+Version: 0.7.1
 Date: 2015-10-20
-Authors@R: person("Alex", "Whitworth", email = "whitworth.alex@gmail.com",
-  role = c("aut","cre"))
+Authors@R: c(
+  person("Alex", "Whitworth", email = "whitworth.alex@gmail.com",
+    role = c("aut","cre")),
+  person("Marcel", "Prince", email= "mprince@dandb.com", role= "ctb")
+  )
 URL: https://github.com/alexwhitworth/imputation
 Description: Impute missing values in a data matrix using weighted-kNN. Weights
      in w-kNN are specified using a Gaussian kernel, specified by kernlab. v0.4

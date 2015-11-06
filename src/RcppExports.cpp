@@ -17,6 +17,17 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// sort_indices
+IntegerVector sort_indices(NumericVector& values);
+RcppExport SEXP imputation_sort_indices(SEXP valuesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< NumericVector& >::type values(valuesSEXP);
+    __result = Rcpp::wrap(sort_indices(values));
+    return __result;
+END_RCPP
+}
 // impute_fn_knn
 double impute_fn_knn(NumericVector& values, NumericVector& distances, int& k, double& sigma);
 RcppExport SEXP imputation_impute_fn_knn(SEXP valuesSEXP, SEXP distancesSEXP, SEXP kSEXP, SEXP sigmaSEXP) {
@@ -28,17 +39,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int& >::type k(kSEXP);
     Rcpp::traits::input_parameter< double& >::type sigma(sigmaSEXP);
     __result = Rcpp::wrap(impute_fn_knn(values, distances, k, sigma));
-    return __result;
-END_RCPP
-}
-// sort_indexes
-std::vector<size_t> sort_indexes(std::vector<double>& values);
-RcppExport SEXP imputation_sort_indexes(SEXP valuesSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< std::vector<double>& >::type values(valuesSEXP);
-    __result = Rcpp::wrap(sort_indexes(values));
     return __result;
 END_RCPP
 }
