@@ -59,7 +59,7 @@ IntegerVector sort_indices(NumericVector& values) {
 
   // initialize original index locations
   IntegerVector idx(values.size());
-  for (size_t i = 0; i != idx.size(); ++i) {
+  for (unsigned int i = 0; i != idx.size(); ++i) {
     idx[i] = i;
   }
 
