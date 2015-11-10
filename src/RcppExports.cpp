@@ -5,6 +5,33 @@
 
 using namespace Rcpp;
 
+// int_rownames
+IntegerVector int_rownames(Rcpp::NumericMatrix x);
+RcppExport SEXP imputation_int_rownames(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type x(xSEXP);
+    __result = Rcpp::wrap(int_rownames(x));
+    return __result;
+END_RCPP
+}
+// impute_fn_knn_all
+NumericMatrix impute_fn_knn_all(NumericMatrix& x_missing, NumericMatrix& x_complete, int& k, int& q, double& sigma, bool& verbose);
+RcppExport SEXP imputation_impute_fn_knn_all(SEXP x_missingSEXP, SEXP x_completeSEXP, SEXP kSEXP, SEXP qSEXP, SEXP sigmaSEXP, SEXP verboseSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< NumericMatrix& >::type x_missing(x_missingSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type x_complete(x_completeSEXP);
+    Rcpp::traits::input_parameter< int& >::type k(kSEXP);
+    Rcpp::traits::input_parameter< int& >::type q(qSEXP);
+    Rcpp::traits::input_parameter< double& >::type sigma(sigmaSEXP);
+    Rcpp::traits::input_parameter< bool& >::type verbose(verboseSEXP);
+    __result = Rcpp::wrap(impute_fn_knn_all(x_missing, x_complete, k, q, sigma, verbose));
+    return __result;
+END_RCPP
+}
 // weighted_mean
 double weighted_mean(NumericVector& x, NumericVector w);
 RcppExport SEXP imputation_weighted_mean(SEXP xSEXP, SEXP wSEXP) {

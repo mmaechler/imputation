@@ -1,7 +1,7 @@
 Package: imputation
 Type: Package
 Title: Missing Value imputation via weighted k-nearest neighbors (w-kNN)
-Version: 0.7.1
+Version: 0.7.2
 Date: 2015-11-09
 Authors@R: c(
   person("Alex", "Whitworth", email = "whitworth.alex@gmail.com",
