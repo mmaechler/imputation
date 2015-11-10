@@ -1,6 +1,17 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
+// this function is a copy of R's function which.
+// [[Rcpp::export]]
+IntegerVector which(LogicalVector x) {
+  IntegerVector out;
+  for (int i = 0; i < x.size(); i++) {
+    if (x[i]) out.push_back(i);
+  }
+  return out;
+}
+
+
 // find which elements are NA in a vector - integer
 IntegerVector which_na_i(IntegerVector vec) {
   int n = vec.size();
