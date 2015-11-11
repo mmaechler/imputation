@@ -76,10 +76,10 @@ IntegerVector sort_indices(NumericVector& values) {
 // in R library(kernlab)
 // [[Rcpp::export]]
 NumericVector kern_wt (double& sigma, NumericVector& x) {
-  NumericVector ret(x.size() - 1);
+  NumericVector ret(x.size());
 
-  for (int i = 1; i < x.size(); i++) {
-    ret[i-1] = std::exp(2 * sigma * -1 * (double) (x[i] * x[i] / 2));
+  for (int i = 0; i < x.size(); i++) {
+    ret[i] = std::exp(2 * sigma * -1 * (double) (x[i] * x[i] / 2));
   }
 
   return ret;

@@ -39,3 +39,28 @@ NumericMatrix col_erase (NumericMatrix& x, IntegerVector& colID) {
   return x2;
 }
 
+//-----------------------------------------------------------------------------
+// [[Rcpp::export]]
+IntegerVector int_rownames(Rcpp::NumericMatrix x) {
+    List dimnames = x.attr("dimnames");
+    CharacterVector rownames = dimnames[0];
+    IntegerVector out(rownames.size());
+
+    transform(rownames.begin(), rownames.end(), out.begin(), atoi);
+
+    return out;
+}
+
+// take a vector of rownames (as in above function) and a comparison integer
+// return the index in rownames_vec that matches the comparison integer
+// [[Rcpp::export]]
+int rowname_match(IntegerVector& rowname_vec, int& rowID) {
+  int matchID = -1;
+  for (int ic = 0; ic < rowname_vec.size(); ic++) {
+      if (rowname_vec[ic] == rowID) {
+        matchID = ic;
+        break;
+      }
+  }
+  return matchID;
+}

@@ -5,30 +5,29 @@
 
 using namespace Rcpp;
 
-// int_rownames
-IntegerVector int_rownames(Rcpp::NumericMatrix x);
-RcppExport SEXP imputation_int_rownames(SEXP xSEXP) {
+// dist_q
+double dist_q(NumericVector x, NumericVector y, int& q);
+RcppExport SEXP imputation_dist_q(SEXP xSEXP, SEXP ySEXP, SEXP qSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type x(xSEXP);
-    __result = Rcpp::wrap(int_rownames(x));
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< int& >::type q(qSEXP);
+    __result = Rcpp::wrap(dist_q(x, y, q));
     return __result;
 END_RCPP
 }
-// impute_fn_knn_all
-NumericMatrix impute_fn_knn_all(NumericMatrix& x_missing, NumericMatrix& x_complete, int& k, int& q, double& sigma, bool& verbose);
-RcppExport SEXP imputation_impute_fn_knn_all(SEXP x_missingSEXP, SEXP x_completeSEXP, SEXP kSEXP, SEXP qSEXP, SEXP sigmaSEXP, SEXP verboseSEXP) {
+// dist_q_matrix
+NumericVector dist_q_matrix(NumericVector& x_ref, NumericMatrix& x_rest, int& q);
+RcppExport SEXP imputation_dist_q_matrix(SEXP x_refSEXP, SEXP x_restSEXP, SEXP qSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< NumericMatrix& >::type x_missing(x_missingSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix& >::type x_complete(x_completeSEXP);
-    Rcpp::traits::input_parameter< int& >::type k(kSEXP);
+    Rcpp::traits::input_parameter< NumericVector& >::type x_ref(x_refSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type x_rest(x_restSEXP);
     Rcpp::traits::input_parameter< int& >::type q(qSEXP);
-    Rcpp::traits::input_parameter< double& >::type sigma(sigmaSEXP);
-    Rcpp::traits::input_parameter< bool& >::type verbose(verboseSEXP);
-    __result = Rcpp::wrap(impute_fn_knn_all(x_missing, x_complete, k, q, sigma, verbose));
+    __result = Rcpp::wrap(dist_q_matrix(x_ref, x_rest, q));
     return __result;
 END_RCPP
 }
@@ -81,29 +80,37 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
-// dist_q
-double dist_q(NumericVector x, NumericVector y, int& q);
-RcppExport SEXP imputation_dist_q(SEXP xSEXP, SEXP ySEXP, SEXP qSEXP) {
+// int_rownames
+IntegerVector int_rownames(Rcpp::NumericMatrix x);
+RcppExport SEXP imputation_int_rownames(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
-    Rcpp::traits::input_parameter< int& >::type q(qSEXP);
-    __result = Rcpp::wrap(dist_q(x, y, q));
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type x(xSEXP);
+    __result = Rcpp::wrap(int_rownames(x));
     return __result;
 END_RCPP
 }
-// dist_q_matrix
-NumericVector dist_q_matrix(NumericVector& x_ref, NumericMatrix& x_rest, int& q);
-RcppExport SEXP imputation_dist_q_matrix(SEXP x_refSEXP, SEXP x_restSEXP, SEXP qSEXP) {
+// rowname_match
+int rowname_match(IntegerVector& rowname_vec, int& rowID);
+RcppExport SEXP imputation_rowname_match(SEXP rowname_vecSEXP, SEXP rowIDSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< NumericVector& >::type x_ref(x_refSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix& >::type x_rest(x_restSEXP);
-    Rcpp::traits::input_parameter< int& >::type q(qSEXP);
-    __result = Rcpp::wrap(dist_q_matrix(x_ref, x_rest, q));
+    Rcpp::traits::input_parameter< IntegerVector& >::type rowname_vec(rowname_vecSEXP);
+    Rcpp::traits::input_parameter< int& >::type rowID(rowIDSEXP);
+    __result = Rcpp::wrap(rowname_match(rowname_vec, rowID));
+    return __result;
+END_RCPP
+}
+// which
+IntegerVector which(LogicalVector x);
+RcppExport SEXP imputation_which(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< LogicalVector >::type x(xSEXP);
+    __result = Rcpp::wrap(which(x));
     return __result;
 END_RCPP
 }
