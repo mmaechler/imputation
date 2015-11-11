@@ -94,20 +94,22 @@ impute_fn_knn_all.Par <- function(x_missing, x_complete, k, q, sigma,
 # @param q ... input to kNN_impute
 # @param sigma ... calculated inside kNN_impute
 # @param leave_cores How many cores do you wish to leave open to other processing?
-impute_fn_knn_all <- function(x_missing, x_complete, k, q, sigma,
-                              verbose, leave_cores= NULL) {
-  
-  if (is.null(leave_cores)) {
-    x_missing_imputed <- .Call('imputation_impute_all_knn', PACKAGE = 'imputation', 
-                               x_missing, x_complete, k, q, sigma, verbose)
-  } else {
-    nnodes <- min(nrow(x_missing), detectCores() - leave_cores)
-    cl <- makeCluster(nnodes)
-    x_missing_imputed <- do.call("rbind", clusterApply(cl, 
-      x= parallel:::splitRows(x_missing, nnodes), 
-      fun= impute_all_knn,
-      x_complete = x_complete, k= k, q= q, sigma= sigma, verbose= verbose))
-    stopCluster(cl)
-  }
-  return(x_missing_imputed)
-}
+
+# [AW 11/11/2015] -- not needed. The c++ version of impute_all_knn is NOT Faster than the R version
+# impute_fn_knn_all <- function(x_missing, x_complete, k, q, sigma,
+#                               verbose, leave_cores= NULL) {
+#   
+#   if (is.null(leave_cores)) {
+#     x_missing_imputed <- .Call('imputation_impute_all_knn', PACKAGE = 'imputation', 
+#                                x_missing, x_complete, k, q, sigma, verbose)
+#   } else {
+#     nnodes <- min(nrow(x_missing), detectCores() - leave_cores)
+#     cl <- makeCluster(nnodes)
+#     x_missing_imputed <- do.call("rbind", clusterApply(cl, 
+#       x= parallel:::splitRows(x_missing, nnodes), 
+#       fun= impute_all_knn,
+#       x_complete = x_complete, k= k, q= q, sigma= sigma, verbose= verbose))
+#     stopCluster(cl)
+#   }
+#   return(x_missing_imputed)
+# }
