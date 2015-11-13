@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 
 
 library(imputation)
@@ -50,3 +51,58 @@ dat_list <- lapply(dat_list, function(l) {l[l>1.25] <- NA; return(l)})
 
 
 # save.image("knn_timing.Rdata")
+=======
+imputation.benchmark.random <- function(numRow = 100, numCol = 100, numMissing = 50,
+                                        imputation.fn = NULL, ...)
+{
+    if(!is.function(imputation.fn))
+        stop("'imputation.fn' must be an imputation R function")
+
+    missingX  <- sample.int(numRow, numMissing, replace = TRUE)
+    missingY  <- sample.int(numCol, numMissing, replace = TRUE)
+
+    x.missing <- x <- matrix(rnorm(numRow * numCol), numRow, numCol)
+    x.missing[cbind(missingX, missingY)] <- NA
+    x.imputed  <- imputation.fn(x.missing, ...)
+
+    SE  <- mapply(function(m.x,m.y) ((x[m.x, m.y] - x.imputed[m.x, m.y]) / x[m.x, m.y])^2,
+                  missingX, missingY)
+    ## return
+    list(data = x,
+         missing = x.missing,
+         imputed = x.imputed,
+         rmse = sqrt(mean(SE))
+    )
+}
+
+imputation.benchmark.ts <- function(numTS = 100, TSlength = 100, numMissing = 50,
+                                    imputation.fn = NULL, ...)
+{
+    if(!is.function(imputation.fn))
+        stop("'imputation.fn' must be an imputation R function")
+
+    missingX  <- sample.int(numTS, numMissing, replace = TRUE)
+    missingY  <- sample.int(TSlength, numMissing, replace = TRUE)
+
+    x.missing <- x <- t(sapply(1:numTS, function(i) {
+        i01  <- rbinom(1, prob= 1/2)
+        ## Need to be careful to only generate time series that are stationary
+        as.vector(
+            if(i01) {
+                arima.sim(n = TSlength, list(ar = c(0.8, -0.5), ma = c(-0.23, 0.25)) )
+            } else if(rand > 0) {
+                arima.sim(n = TSlength, list(ar = c(1, -0.5), ma = c(-.4)) )
+            })
+    }))
+    x.missing[cbind(missingX, missingY)] <- NA
+    x.imputed  <- imputation.fn(x.missing, ...)
+
+    SE  <- mapply(function(m.x,m.y) ((x[m.x, m.y] - x.imputed[m.x, m.y]) / x[m.x, m.y])^2,
+                  missingX, missingY)
+    ## return
+    list(data = x,
+         missing = x.missing,
+         imputed = x.imputed,
+         rmse = sqrt(mean(SE)))
+}
+>>>>>>> Stashed changes
