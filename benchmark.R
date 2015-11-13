@@ -1,4 +1,5 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 
 library(imputation)
@@ -52,6 +53,8 @@ dat_list <- lapply(dat_list, function(l) {l[l>1.25] <- NA; return(l)})
 
 # save.image("knn_timing.Rdata")
 =======
+=======
+>>>>>>> Stashed changes
 imputation.benchmark.random <- function(numRow = 100, numCol = 100, numMissing = 50,
                                         imputation.fn = NULL, ...)
 {

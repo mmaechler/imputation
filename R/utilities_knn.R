@@ -21,6 +21,9 @@ dist_q <- function(x, y, q = 2) {
 }
 
 #' @title Calculate \eqn{L_q} distance
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 #' @description Calculate \eqn{L_q} distance of all vectors in a matrix to a reference
 #' vector.
@@ -29,6 +32,7 @@ dist_q <- function(x, y, q = 2) {
 #' @param q An integer specifying the which norm to take the L-q distance of.
 #' @return a numeric vector of length \code{nrow(x) - 1}
 #' @export
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 dist_q.matrix <- function(x, ref= 1L, q= 2) {
   if (!is.numeric(x) | !is.matrix(x)) stop("x must be a numeric matrix.")
@@ -51,6 +55,15 @@ dist_q.matrix <- function(x, ref = 1, q = 2) {
 
   x_ref <- x[ref,]
   x_rest <- x[-ref,]
+=======
+dist_q.matrix <- function(x, ref = 1, q = 2) {
+  if (!is.numeric(x) || !is.matrix(x)) stop("x must be a numeric matrix.")
+  if (ref < 1 || ref > nrow(x)) stop("ref must be an integer in {1, .., nrow(x)}.")
+  if (q < 1) stop("q must be an integer >= 1")
+
+  x_ref <- x[ref,]
+  x_rest <- x[-ref,]
+>>>>>>> Stashed changes
 
   apply(x_rest, 1, dist_q, y = x_ref, q = q)
 }

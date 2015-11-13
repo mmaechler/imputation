@@ -16,6 +16,9 @@ Date: 2015-11-10
 Authors@R: c(person("Alex", "Whitworth", email = "whitworth.alex@gmail.com", role = c("aut","cre"))
 	   , person("Martin","Maechler", role=c("ctb"), email="maechler@stat.math.ethz.ch")
 	     )
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 URL: https://github.com/alexwhitworth/imputation
 Description: Impute missing values in a data matrix using weighted-kNN. Weights
@@ -28,12 +31,15 @@ Description: Impute missing values in a data matrix using weighted-kNN. Weights
 License: GPL
 LazyLoad: yes
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 Depends:
     locfit, kernlab (>= 0.9), parallel (>= 3.0)
 Suggests: testthat
 LinkingTo: Rcpp
 Imports: Rcpp
 =======
+=======
+>>>>>>> Stashed changes
 Imports: locfit, kernlab (>= 0.9)
 
 

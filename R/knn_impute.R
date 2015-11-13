@@ -10,6 +10,7 @@
 #' using a Gaussian kernal bandwidth parameter using 'Silverman's rule of thumb'
 #' as described by Silverman (1998)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 #' @section Details:
 #' Imputation can be done on all observations in a single group or via overlapping
 #' canopies (eg. subsets). Canopies are based on distance to the dataset centroid.
@@ -31,6 +32,9 @@
 =======
 #'
 >>>>>>> Stashed changes
+=======
+#'
+>>>>>>> Stashed changes
 #' @param x a \code{matrix} or \code{data.frame} which can be coerced to a matrix
 #'  where each row represents a different record
 #' @param k the number of neighbors to use for imputation
@@ -39,6 +43,9 @@
 =======
 #' @param impute_fn The imputation function to run on the length k vector of values for
 #'   a missing feature.  Defaults to weighted mean-KNN; see Details.
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 #' @param verbose if \code{TRUE} print status updates
 #' @param check_scale Logical. If \code{TRUE} compute pairwise variance tests to see if
@@ -54,6 +61,7 @@
 #' Proceedings of the sixth ACM SIGKDD international conference on Knowledge 
 #' discovery and data mining. ACM, 2000.
 #' @examples
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 #'   x = matrix(rnorm(100),10,10)
 #'   x[x > 1] = NA
@@ -90,6 +98,19 @@ kNN_impute <- function(x, k, q = 2, verbose = TRUE, check.scale = TRUE) {
 
   # 01a. Do some preliminaries
   #--------------------------------------------------------
+=======
+#'  x <- matrix(rnorm(200), 20,10)
+#'  x_missing <- x > 1
+#'  x[x_missing] <- NA
+#'  kNN_impute(x, 3)
+#' @export
+#' @importFrom kernlab rbfdot
+#' @importFrom stats sd
+kNN_impute <- function(x, k, q = 2, verbose = TRUE, check.scale = TRUE) {
+
+  # 01a. Do some preliminaries
+  #--------------------------------------------------------
+>>>>>>> Stashed changes
   if (is.data.frame(x)) x <- data.matrix(x) # ==> error if not succeeding
   if(k < 1 || k >= nrow(x)) stop("k must be an integer in {1, nrow(x) - 1}")
   if (q < 1) stop("q must be an integer >= 1")
@@ -97,6 +118,9 @@ kNN_impute <- function(x, k, q = 2, verbose = TRUE, check.scale = TRUE) {
   prelim  <- impute_prelim(x)
   if (prelim$numMissing == 0) return (x) # no missing
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   col_na <- apply(x, 2, function(j) all(is.na(j)))
   row_na <- apply(x, 1, function(i) all(is.na(i)))
@@ -105,6 +129,7 @@ kNN_impute <- function(x, k, q = 2, verbose = TRUE, check.scale = TRUE) {
     cat("column(s)", which(col_na), "are entirely missing.")
     stop("Please fix missing columns.")
   }
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
   
   # [10/13] add rownames such that impute_prelim() can work with or without canopies
@@ -181,6 +206,8 @@ kNN_impute <- function(x, k, q = 2, verbose = TRUE, check.scale = TRUE) {
 }
 
 =======
+=======
+>>>>>>> Stashed changes
 
   # 01b. Test if variables on same scale
   #--------------------------------------------------------
@@ -240,4 +267,7 @@ kNN_impute <- function(x, k, q = 2, verbose = TRUE, check.scale = TRUE) {
   list(x = x,
        num_errors = if(num_errors > 0) num_errors)
 }
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
